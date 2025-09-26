@@ -1,0 +1,50 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Copy JSON ETL/Mulesoft</title>
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+	<div class="container">
+		<div class="font-slider-row">
+			<label for="font-size-slider">Font size:</label>
+			<input type="range" id="font-size-slider" min="10" max="24" step="0.1">
+			<span id="font-size-value"></span>
+		</div>
+		<div class="inputs-row">
+			<div class="input-group">
+				<label for="etl">ETL</label>
+				<textarea id="etl" placeholder="Paste the ETL JSON here..."></textarea>
+			</div>
+			<div class="input-group">
+				<label for="mulesoft">Mulesoft</label>
+				<textarea id="mulesoft" placeholder="Paste the Mulesoft JSON here..."></textarea>
+			</div>
+		</div>
+		<!-- Monaco Editors for JSON output and diff -->
+	<div id="equal-label" style="display:none;text-align:center;font-weight:bold;color:#388e3c;font-size:1.2rem;margin-bottom:12px;"></div>
+	<div class="monaco-row">
+			<div class="monaco-group">
+				<label for="monaco-etl">Formatted JSON ETL</label>
+				<div id="monaco-etl" class="monaco-editor" style="height: 650px;"></div>
+			</div>
+			<div class="monaco-group">
+				<label for="monaco-mulesoft">Formatted JSON Mulesoft</label>
+				<div id="monaco-mulesoft" class="monaco-editor" style="height: 650px;"></div>
+			</div>
+		</div>
+		</div>
+		<!-- <div class="monaco-row">
+			<div class="monaco-group" style="width: 100%;">
+				<label for="monaco-diff">Diferenças</label>
+				<div id="monaco-diff" class="monaco-editor" style="height: 350px;"></div>
+			</div>
+		</div> -->
+	</div>
+	<script src="https://cdn.jsdelivr.net/npm/monaco-editor@0.45.0/min/vs/loader.js"></script>
+	<script src="script.js"></script>
+</body>
+</html>
