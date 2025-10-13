@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Compare JSON Datasets</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="page">
+    <h1 id="page-title">ETL vs MuleSoft Comparison</h1>
+    <p class="lead">Drop CSV or data into each panel or paste tab-separated content, then click compare.</p>
+
+    <section class="inputs">
+      <div class="input-panel">
+        <header>ETL Data</header>
+        <textarea id="etl-input" class="data-input" placeholder="Drop a .csv file or paste tab-separated data here" spellcheck="false"></textarea>
+      </div>
+      <div class="input-panel">
+        <header>MuleSoft Data</header>
+        <textarea id="mule-input" class="data-input" placeholder="Drop a .csv file or paste tab-separated data here" spellcheck="false"></textarea>
+      </div>
+    </section>
+
+    <div class="actions">
+      <button id="compare-btn" type="button">Compare</button>
+    </div>
+
+    <div id="message-box" class="message-box" role="alert"></div>
+
+    <section class="results">
+      <table id="results-table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Entity Reference ID</th>
+            <th>Entity Type</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody class="results-body">
+          <tr class="placeholder-row">
+            <td colspan="4">Run a comparison to populate results.</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="detail-view" class="detail hidden" aria-live="polite">
+      <div class="detail-header">
+        <h2 id="detail-title">Record Details</h2>
+        <span id="detail-status" class="status-chip">Status: —</span>
+      </div>
+      <div class="detail-grid">
+        <article id="etl-panel" class="json-panel">
+          <header>
+            <span>ETL JSON</span>
+            <span id="etl-badge" class="badge">—</span>
+          </header>
+          <div id="etl-json" class="json-view etl-view"></div>
+        </article>
+        <article id="mule-panel" class="json-panel">
+          <header>
+            <span>MuleSoft JSON</span>
+            <span id="mule-badge" class="badge">—</span>
+          </header>
+          <div id="mule-json" class="json-view mule-view"></div>
+        </article>
+      </div>
+      <div id="diff-summary" class="diff-summary"></div>
+    </section>
+  </main>
+
+  <script src="diff-engine.js" defer></script>
+  <script src="script.js" defer></script>
+</body>
+</html>
