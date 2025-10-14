@@ -2,7 +2,7 @@
   "use strict";
 
   const BASE_TITLE = "ETL vs MuleSoft Comparison";
-  const APP_VERSION = "v2024-05-09 20:10 UTC"; // Update timestamp whenever code changes.
+  const APP_VERSION = "v2024-05-09 16:50 EST"; // Update timestamp whenever code changes.
 
   const DiffEngine = window.JSONDiffEngine;
 
@@ -22,6 +22,8 @@
   const detailView = document.getElementById("detail-view");
   const detailTitle = document.getElementById("detail-title");
   const detailStatus = document.getElementById("detail-status");
+  const resultsSection = document.querySelector(".results");
+  const resultsTable = document.getElementById("results-table");
   const etlPanel = document.getElementById("etl-panel");
   const mulePanel = document.getElementById("mule-panel");
   const etlBadge = document.getElementById("etl-badge");
@@ -88,6 +90,7 @@
 
     renderTable();
     hideDetailPanel();
+    scrollResultsIntoView();
   }
 
   /**
@@ -96,7 +99,11 @@
   function updatePageVersion() {
     const titleNode = document.getElementById("page-title");
     if (titleNode) {
-      titleNode.textContent = `${BASE_TITLE} — ${APP_VERSION}`;
+      const label = document.createElement("span");
+      label.className = "version-label";
+      label.textContent = APP_VERSION;
+      titleNode.textContent = BASE_TITLE;
+      titleNode.appendChild(label);
     }
     document.title = `${BASE_TITLE} · ${APP_VERSION}`;
   }
@@ -139,6 +146,16 @@
       row.append(idxCell, idCell, typeCell, statusCell);
       resultsBody.appendChild(row);
     });
+  }
+
+  /**
+   * Smoothly scroll the results table into view after comparisons run.
+   */
+  function scrollResultsIntoView() {
+    const target = resultsSection || resultsTable;
+    if (target) {
+      target.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
   }
 
   /**
@@ -600,7 +617,7 @@
   }
 
   /**
-   * Remove trailing millisecond markers and null values from parsed JSON data.
+   * Remove trailing millisecond markers, null values, and comparison-exempt fields from parsed JSON.
    */
   function sanitizeData(value) {
     if (value === null || value === undefined) {
@@ -617,6 +634,9 @@
     if (typeof value === "object") {
       const sanitizedObject = {};
       Object.keys(value).forEach((key) => {
+        if (key === "report_id") {
+          return;
+        }
         const sanitizedValue = sanitizeData(value[key]);
         if (sanitizedValue !== undefined) {
           sanitizedObject[key] = sanitizedValue;
