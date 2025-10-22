@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>DataWeave Fields Extractor</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <div class="wrap title">
+      <h1>DataWeave Fields Extractor</h1>
+      <span class="pill">Generate a %dw 2.0 script with referenced fields</span>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="card">
+      <div class="hd">
+        <h2>1) Paste your DataWeave script</h2>
+        <div class="row">
+          <label class="tog small"><input type="checkbox" id="live" checked> Live update</label>
+        </div>
+      </div>
+      <div class="bd">
+        <div class="toolbar" style="margin-bottom:10px">
+          <button class="btn min" id="ex">Example</button>
+          <span class="note">Tip: <span class="kbd">Ctrl</span>/<span class="kbd">Cmd</span> + <span class="kbd">V</span> to paste</span>
+        </div>
+        <textarea id="src" placeholder="Paste your DataWeave script here (%dw 2.0)"></textarea>
+        <div class="hint small">
+          The parser identifies references to <code>payload</code>, <code>attributes</code>, <code>error</code>, <code>vars.*</code>, and <code>p(...)</code> calls.
+          Only the first level of <code>vars</code> is considered to simplify the output.
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="hd">
+        <h2>2) Generated DataWeave code</h2>
+        <div class="row">
+          <button class="btn ok" id="copy">Copy</button>
+        </div>
+      </div>
+      <div class="bd">
+        <div class="chips" id="chips"></div>
+        <div class="out">
+          <pre><code id="dw"></code></pre>
+        </div>
+        <div class="footer small ghost">Compatible with DataWeave Playground – output <code>application/json</code>.</div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="hd">
+        <h2>3) Modified DataWeave script</h2>
+        <div class="row">
+          <button class="btn ok" id="copyModified">Copy Modified</button>
+        </div>
+      </div>
+      <div class="bd">
+        <div class="out">
+          <pre><code id="modified"></code></pre>
+        </div>
+        <div class="footer small ghost">Includes automatic adjustments for <code>p()</code> and <code>dateNormalizer</code> imports.</div>
+      </div>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
